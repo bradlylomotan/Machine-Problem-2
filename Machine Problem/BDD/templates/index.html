@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backward Finite Difference</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #7c1f1f;
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        p {
+            margin: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Backward Finite Difference</h1>
+    <form method="post" action="/">
+        <label for="polynomial">Function:</label>
+        <input type="text" name="polynomial" required>
+        <label for="x_value">xi:</label>
+        <input type="text" name="x_value" required>
+        <label for="step_size_h1">h1:</label>
+        <input type="text" name="step_size_h1" required>
+        <label for="step_size_h2">h2:</label>
+        <input type="text" name="step_size_h2" required>
+        <button type="submit">Calculate</button>
+    </form>
+    {% if result %}
+        <div class="result-box">
+            {% if result[0] is not none %}
+                <p>Derivative Truncated Version (h1): {{ result[0]|default('None')|round(5) }}</p>
+            {% endif %}
+            {% if result[1] is not none %}
+                <p>Derivative Truncated Version (h2): {{ result[1]|default('None')|round(5) }}</p>
+            {% endif %}
+            {% if result[2] is not none %}
+                <p>More Accurate Derivative Version (h2): {{ result[2]|default('None')|round(5) }}</p>
+            {% endif %}
+            {% if richardson_result is not none %}
+                <p>Richardson's Extrapolation: {{ richardson_result|default('None')|round(5) }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>

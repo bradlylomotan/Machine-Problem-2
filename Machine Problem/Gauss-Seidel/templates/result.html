@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+            font-size: 40px; 
+
+        }
+        h2 {
+            text-align: left;
+            color: #000000;
+            margin-left: 100px;
+            font-size: 30px; 
+
+        }
+
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #7c1f1f;
+            color: #fff;
+            
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        p.equation-label {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 35px; 
+        }
+
+        a.button-box {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px; 
+        }
+
+        a.button-box:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gauss-Seidel Result</h1>
+    {% if iterations %}
+        <table>
+            <tr>
+                <th>Iteration</th>
+                <th>x<sub>1</sub></th>
+                <th>x<sub>2</sub></th>
+                <th>x<sub>3</sub></th>
+            </tr>
+            {% for iteration, roots in iterations.items() %}
+                <tr>
+                    <td>{{ iteration }}</td>
+                    <td>{{ roots[0]|default('') }}</td>
+                    <td>{{ roots[1]|default('') }}</td>
+                    <td>{{ roots[2]|default('') }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <ul>
+        {% for equation in equations %}
+            <li>{{ equation }}</li>
+        {% endfor %}
+    </ul>
+    {% if iterations %}
+        {% for iteration, roots in iterations.items() %}
+            {% if loop.last %}
+            <p class="equation-label">Equation: x<sub>1</sub> = {{ roots[0]|default('')|round(4) }}, x<sub>2</sub> = {{ roots[1]|default('')|round(4) }}, x<sub>3</sub> = {{ roots[2]|default('')|round(4) }}</p>
+
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <a href="{{ url_for('index') }}" class="button-box">Back to Input</a>
+</body>
+</html>

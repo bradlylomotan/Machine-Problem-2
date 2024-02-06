@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gauss-Seidel Method</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .initial-values {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #7c1f1f;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4caf50;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 8px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gauss-Seidel Method</h1>
+    <form method="post">
+
+        <label>Equation:</label>
+        {% for i in range(3) %}
+            <div style="display: flex; margin-bottom: 12px;">
+                <label>{{ i + 1 }}: </label>
+                <input type="text" name="x1_{{ i }}" placeholder="x₁" required>
+                {% if i == 0 %}
+                    <input type="text" name="x2_{{ i }}" placeholder="x₂" required>
+                    <input type="text" name="x3_{{ i }}" placeholder="x₃" required>
+                {% else %}
+                    <input type="text" name="x2_{{ i }}" placeholder="x₂">
+                    <input type="text" name="x3_{{ i }}" placeholder="x₃">
+                {% endif %}
+                <label>=</label>
+                <input type="text" name="b_{{ i }}" placeholder="0" required>
+            </div>
+        {% endfor %}
+
+        <label>Accuracy (e.g., 0.00001, 1e-6):</label>
+        <input type="text" name="accuracy" placeholder="Accuracy" value ="0.00001" required><br>
+        <label>Initial Values:</label>
+             <div class="initial-values">
+            <input type="text" name="initial_x1" placeholder="Initial x₁" required>
+            <input type="text" name="initial_x2" placeholder="Initial x₂" required>
+            <input type="text" name="initial_x3" placeholder="Initial x₂" required>
+             </div>
+        <br>
+        <button type="submit">Calculate</button>
+    </form>
+    {% if roots %}
+        <h2>Roots:</h2>
+        <p>x1: {{ roots[0] }}</p>
+        <p>x2: {{ roots[1] }}</p>
+        <p>x3: {{ roots[2] }}</p>
+    {% endif %}
+</body>
+</html>

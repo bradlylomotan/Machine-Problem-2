@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simpson's 3/8 Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #error-message {
+            margin-top: 8px;
+            color: red;
+        }
+
+        input:focus {
+            border-color: #45a049;
+            box-shadow: 0 0 5px rgba(0, 128, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Simpson's 3/8 Calculator</h1>
+    <form method="POST" action="/">
+        <label for="poly_function">Function:</label>
+        <input type="text" name="poly_function" required><br>
+        
+        <label for="lower_boundary">Lower Boundary:</label>
+        <input type="number" step="any" name="lower_boundary" required><br>
+        
+        <label for="upper_boundary">Upper Boundary:</label>
+        <input type="number" step="any" name="upper_boundary" required><br>
+        
+        <label for="num_segments">Number of Segments (n):</label>
+        <input type="number" name="num_segments" required oninput="validateSegments(this)">
+        
+        <p id="error-message"></p>
+        
+        <button type="submit" id="calculate-button" disabled>Calculate</button>
+
+        <script>
+            function validateSegments(input) {
+                // Check if the entered value is divisible by 3
+                if (input.value % 3 !== 0) {
+                    document.getElementById('error-message').innerText = 'Number of segments must be divisible by 3.';
+                    document.getElementById('calculate-button').disabled = true;
+                } else {
+                    document.getElementById('error-message').innerText = '';
+                    document.getElementById('calculate-button').disabled = false;
+                }
+            }
+        </script>
+    </form>
+</body>
+</html>

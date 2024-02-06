@@ -1,0 +1,113 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Point Iteration</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 60%;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #7c1f1f;
+        }
+
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin: auto;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #7c1f1f;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fixed Point Iteration</h1>
+    <form method="post">
+        <label for="polynomial">Function:</label>
+        <input type="text" name="polynomial" required><br>
+
+        <label for="initial_guess">Initial Guess:</label>
+        <input type="number" name="initial_guess" required><br>
+
+        <label for="tolerance">Tolerance:</label>
+        <input type="number" name="tolerance" step="0.00001" required><br>
+
+        <label for="max_iterations">Max Iterations:</label>
+        <input type="number" name="max_iterations" required><br>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if iterations %}
+        <h2>Iterations:</h2>
+        <table>
+            <tr>
+                <th>Xn</th>
+                <th>Xn+1</th>
+            </tr>
+            {% for iteration in iterations %}
+                <tr>
+                    <td>{{ iteration[0]|round(5) }}</td>
+                    <td>{{ iteration[1]|round(5) }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
